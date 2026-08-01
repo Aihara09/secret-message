@@ -1,0 +1,168 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secret Message</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    color:white;
+}
+
+.container{
+    width:90%;
+    max-width:700px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(10px);
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 0 20px rgba(0,0,0,.5);
+    text-align:center;
+}
+
+input{
+    width:80%;
+    padding:12px;
+    margin:15px 0;
+    border:none;
+    border-radius:10px;
+    outline:none;
+    text-align:center;
+    font-size:16px;
+}
+
+button{
+    padding:12px 30px;
+    border:none;
+    border-radius:25px;
+    background:#ff4d6d;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    background:#ff2d55;
+}
+
+#messageBox{
+    display:none;
+    margin-top:25px;
+    text-align:left;
+}
+
+#message{
+    white-space:pre-wrap;
+    border-right:3px solid white;
+    overflow:hidden;
+    animation:blink .7s infinite;
+    line-height:1.8;
+    font-size:18px;
+}
+
+@keyframes blink{
+    50%{
+        border-color:transparent;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>🔒 Secret Letter</h2>
+
+<p>Enter the password to read the message.</p>
+
+<input type="password" id="password" placeholder="Password">
+
+<br>
+
+<button onclick="unlock()">Open Letter</button>
+
+<div id="messageBox">
+<h2 style="margin-bottom:15px;">💔 My Message</h2>
+
+<p id="message"></p>
+
+</div>
+
+</div>
+
+<script>
+
+const secretPassword = "mymessage"; // Change your password here
+
+const text = `There are things I never found the courage to say while everything was still okay.
+
+Sometimes I wonder if you ever think about the memories we shared. The simple conversations, the laughter, the moments that once made everything feel complete. Those memories still stay with me even though time keeps moving forward.
+
+I never expected things to end the way they did. I thought we would always find a way to understand each other. Instead, we slowly became strangers with beautiful memories.
+
+There were days when I wanted to tell you how much I missed you, but I stayed silent because I didn't want to interrupt your happiness. Maybe silence was easier than hearing words that would break my heart even more.
+
+If you are happy now, then I truly hope your smile is genuine. Even if I'm no longer part of your story, I hope life gives you everything you've ever wished for.
+
+As for me, I'm still learning how to let go. Healing isn't something that happens overnight. Some days are easier than others, but I keep reminding myself that every ending teaches us something valuable.
+
+Maybe one day we'll look back at these memories without pain. Maybe one day they'll simply become reminders that we once cared deeply, even if life took us in different directions.
+
+Thank you for every memory, every lesson, every smile, and even every tear.
+
+Goodbye, and take care of yourself.`;
+
+function unlock(){
+
+let pass=document.getElementById("password").value;
+
+if(pass===secretPassword){
+
+document.querySelector(".container").style.height="auto";
+document.getElementById("messageBox").style.display="block";
+
+typeWriter();
+
+}else{
+
+alert("Incorrect password!");
+
+}
+
+}
+
+let i=0;
+
+function typeWriter(){
+
+if(i<text.length){
+
+document.getElementById("message").innerHTML+=text.charAt(i);
+
+i++;
+
+setTimeout(typeWriter,35);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
